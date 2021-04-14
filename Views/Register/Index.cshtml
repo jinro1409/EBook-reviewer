@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creative Colorlib SignUp Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    
+    <link href="../assets/css/login.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
+</head>
+<body>
+    <!-- main -->
+    <div class="main-w3layouts wrapper">
+        <h1>Login</h1>
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <form action="../Register/IndexPost" method="post">
+
+                    <input class="text email" type="text" name="fullname" placeholder="Fullname" required="">
+                    <input class="text" type="date" name="dob" required="" style="margin-bottom:30px">
+
+                    <input class="text" type="text" name="username" placeholder="Username" required="">
+                    <input class="text email" type="email" name="email" placeholder="Email" required="">
+
+
+                    <input class="text" type="password" name="password" placeholder="Password" onchange="checkRepassword()" id="txtPassword" required="">
+                    <input class="text w3lpass" type="password" name="repassword" id="txtRepassword" onchange="checkRepassword()" placeholder="Confirm Password" required="">
+                    <label id="not_match_password" style="color:red;display:none;">Not match</label>
+                    <div class="wthree-text" style="height: 50px">
+                        <span class="text">Gender</span>
+
+                        <input type="radio" name="gender" value="Male" />Male
+                        <input type="radio" name="gender" value="Female" />Female
+                    </div>
+
+
+                    <div class="wthree-text">
+                        <label class="anim">
+                            <input type="checkbox" class="checkbox" required="">
+                            <span>I Agree To The Terms & Conditions</span>
+                        </label>
+                        <div class="clear"> </div>
+                    </div>
+                    <input type="submit" value="SIGNUP" id="btnSubmit">
+                </form>
+               
+                <span style="color: yellow">
+                   @ViewBag.notify
+                </span>
+                <p>Already had an Account? <a href="login"> Login Now!</a></p>
+
+            </div>
+        </div>
+        <!-- copyright -->
+        <div class="colorlibcopy-agile">
+            <p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
+        </div>
+        <!-- //copyright -->
+        <ul class="colorlib-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <!-- //main -->
+</body>
+
+</html>
+<script>
+
+    function checkRepassword() {
+        var txtRepassword = document.getElementById("txtRepassword").value.toString();
+        var txtPassword = document.getElementById("txtPassword").value.toString();
+        var lblAlert = document.getElementById("not_match_password");
+        var btnSubmit = document.getElementById("btnSubmit");
+        if (txtPassword !== txtRepassword) {
+            lblAlert.style.display = "inline-block";
+            btnSubmit.disabled = true;
+        } else {
+            btnSubmit.disabled = false;
+            lblAlert.style.display = "none";
+        }
+    }
+
+</script>
+

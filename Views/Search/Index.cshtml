@@ -1,0 +1,85 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+        @foreach (var item in Model.books)
+        {
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="single-blog">
+                    <div class="single-blog-img">
+                        <a href="Detail?bookid=@item.id">
+                            <img src="../assets/img/book/@item.img" alt="Loi anh r e oi">
+                        </a>
+                    </div>
+                    <div class="blog-meta">
+                        <span class="comments-type">
+                            
+                        </span>
+                        <span class="date-type">
+                            <i class="fa fa-calendar"></i>@item.pulishedDate
+                        </span>
+                    </div>
+                    <div class="blog-text">
+                        <h4>
+                            <a href="Detail?bookid=@item.id">@item.name</a>
+                        </h4>
+                        <p>
+                            @item.shortDes
+                        </p>
+                    </div>
+                    <span>
+                        <a href="Detail?bookid=@item.id" class="ready-btn">Read more</a>
+                    </span>
+                </div>
+            </div>
+        }
+
+    <div class="blog-pagination">
+        @{
+            int currentPage = ViewBag.pageIndex;
+            string text = ViewBag.text;
+        }
+
+        <ul class="pagination">
+            @if (currentPage > 1)
+            {
+                int previous = currentPage - 1;
+                <li class="page-item"><a href="../Search?text=@text&pageIndex=@previous" class="page-link">&lt;</a></li>
+
+            }
+            @for (int i = 1; i <= ViewBag.totalPage; i++)
+            {
+
+
+                if (currentPage == i)
+                {
+                    <li class="page-item active">
+                        <a href="../Search?text=@text&pageIndex=@i" class="page-link">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a href="../Search?text=@text&pageIndex=@i" class="page-link">@i</a>
+                    </li>
+                }
+
+            }
+            @if (currentPage < ViewBag.totalPage)
+            {
+                int next = currentPage + 1;
+                <li class="page-item"><a href="../Search?text=@text&pageIndex=@next" class="page-link">&gt;</a></li>
+
+            }
+        </ul>
+    </div>
+    </div>
+</div>
+
+
+

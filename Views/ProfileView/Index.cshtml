@@ -1,0 +1,152 @@
+﻿
+                            
+@model dynamic
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+    <!------ Include the above in your HEAD tag ---------->
+    <head>
+
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-xs-12 col-sm-8">
+                        @{
+
+                            var dob = Model.acc.DOB.ToString("MM-dd-yyyy");
+
+                        }
+                        <h2>@Model.acc.Fullname</h2>
+                        <p><strong>DOB: </strong>  @dob </p>
+                        <p><strong>Email: </strong> @Model.acc.Email </p>
+                        <p>
+                            @{
+                                string gender = "Female";
+                                bool a = Model.acc.gender;
+                                if (a)
+                                {
+                                    gender = "Male";
+                                }
+                            }
+                            <strong>Gender: @gender </strong>
+
+                        </p>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 divider text-center">
+
+                    <div class="col-xs-12 col-sm-4 emphasis">
+                        <h2><strong> @ViewBag.countcmt</strong></h2>
+                        <p><small>Comments</small></p>
+                        <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Comment </button>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 emphasis">
+                        <h2><strong>0</strong></h2>
+                        <p><small>Snippets</small></p>
+                        <div class="btn-group dropup btn-block">
+
+                            <button type="button" class="btn btn-primary" onclick="myFu()"><span class="fa fa-plus-circle"></span>Change Password </button>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <span class="text-center" style="color:red">
+                              @ViewBag.notifi
+            </span>
+            <div class="col-xs-12 divider text-center" id="myeDIV">
+                <form action="../Update" >
+                    <table class="table" style="margin: 40px auto">
+
+                        <tr>
+                            <td>NAME</td>
+                            <td> <input type="text" name="fullname" value="@Model.acc.Fullname" /></td>
+                        </tr>
+                        <tr>
+                            <td>DOB</td>
+                            <td>
+                                
+                                <input type="datetime" name="dob" value="@dob" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>EMAIL</td>
+                            <td>
+                                <input type="text" name="mail" value="@Model.acc.email" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GENDER</td>
+                            @{
+                                string m = "false";
+                                string fm = "true";
+                                if (a)
+                                {
+                                    m = "true";
+                                    fm = "false";
+                                }
+                            }
+                            <td>
+                                <input type="radio" name="gender"
+                                       value="male" checked="@m"/>MALE
+                                <input type="radio" name="gender"
+                               checked="@fm"
+                                value="female" />FEMALE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="btn btn-info btn-block" type="submit" value="Save" />
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+                <form action="ChangePass" method="POST">
+                    <table class="table" style="margin: 40px auto">
+
+                        <tr>
+                            <td>Old Password</td>
+                            <td> <input type="password" name="oldpass" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>New Password</td>
+                            <td>
+                                <input type="password" name="newpass" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Re-enter Password</td>
+                            <td>
+                                <input type="password" name="renewpass" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>                      </td>
+                            <td>
+                                <input class="btn btn-info btn-block" type="submit" value="Save" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+
+
+        </div>
+

@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Creative Colorlib SignUp Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../assets/css/login.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
+</head>
+<body>
+    <!-- main -->
+    <div class="main-w3layouts wrapper">
+        <h1>Login</h1>
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <form action="../Vertify/IndexPost" method="post">
+                    <input class="text" type="text" name="code" placeholder="ENTER CODE HERE" required="">
+
+                    <div class="wthree-text">
+
+                        <div class="clear"> </div>
+                    </div>
+                    <input type="submit" value="VERTIFY">
+                </form>
+                <p>Have an Account? <a href="register"> Signin Now!</a></p>
+                <span style="color: yellow">
+                    @ViewBag.vertifyMess
+                </span>
+                @{
+
+                    if (Session["code_verify"] == null)
+                    {
+                        <span style="color: yellow">
+                            You have not yet register account;
+                        </span>
+                    }
+                }
+            </div>
+        </div>
+        <!-- copyright -->
+        <div class="colorlibcopy-agile">
+            <p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
+        </div>
+        <!-- //copyright -->
+        <ul class="colorlib-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <!-- //main -->
+</body>
+</body>
+</html>
+

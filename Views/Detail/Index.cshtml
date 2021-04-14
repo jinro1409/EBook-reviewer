@@ -1,0 +1,185 @@
+﻿@using WebApplication1.Models;
+@model dynamic
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!-- single-blog start -->
+            <article class="blog-post-wrapper">
+                <div class="post-thumbnail">
+                    <img src="../assets/img/book/@Model.book.img" alt="" />
+                </div>
+                <div class="post-information">
+                    <h1>@Model.book.name</h1>
+                    @foreach (var item in Model.authors)
+                    {
+                        <h3>@item.name</h3
+>
+                    }
+                    <div class="entry-meta">
+
+                        <span class="author-meta"><i class="fa fa-user"></i> <a href="#">@Model.book.createdby.fullname</a></span>
+                        <span><i class="fa fa-clock-o"></i>@Model.book.pulishedDate</span>
+                        @{
+                            int count = ViewBag.count;
+                        }
+                        <span><i class="fa fa-comments-o"></i> <a href="#comments">@count comments</a></span>
+                    </div>
+                    <div class="entry-content">
+                        @Model.book.des
+                    </div>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <div class="single-post-comments" id="comments">
+                <div class="comments-area">
+                    <div class="comments-heading">
+
+                        <h3>@count comments</h3>
+                    </div>
+                    <div class="comments-list" >
+                        <ul>
+                            @{
+                                account a = (account)Session["user"];
+                            }
+                            @foreach (var item in Model.comments)
+                            {
+                                if (a != null)
+                                {
+                                    if (item.createdby.username == a.username)
+                                    {
+                                        <form action="../Deletecmt">
+
+                                            <li class="threaded-comments">
+                                                <div class="comments-details">
+                                                    <div class="comments-list-img">
+                                                        <img src="assets/img/blog/b02.jpg" alt="post-author">
+                                                    </div>
+                                                    <div class="comments-content-wrap">
+                                                        <span>
+                                                            <b><a href="#">@item.createdby.fullname</a></b>
+                                                            Post author
+                                                            <span class="post-time">
+                                                                @item.createdon
+                                                            </span>
+                                                        </span>
+                                                        <input type="hidden" name="bookid" value="@item.bookid" />
+                                                        <input type="hidden" name="cmtid" value="@item.id" />
+                                                        <p>@item.detail</p>
+                                                        <input type="submit" value="Delete" />
+
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <li class="threaded-comments">
+                                            <form action="../Reply">
+                                                <div class="comments-details">
+
+                                                    <div class="comments-list-img">
+                                                        <img src="assets/img/blog/b02.jpg" alt="post-author">
+                                                    </div>
+                                                    <div class="comments-content-wrap">
+                                                        <span>
+                                                            <b><a href="#">@item.createdby.fullname</a></b>
+                                                            Post author
+                                                            <span class="post-time">
+                                                                @item.createdon
+                                                            </span> <a onclick="showReply()"> Reply</a>
+                                                        </span>
+                                                        <input type="hidden" name="bookid" value="@Model.book.id">
+                                                        <input type="hidden" name="cmtid" value="@item.id" />
+                                                        <p>@item.detail </p>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <textarea id="replybox" name="detail" cols="30" rows="10" style="display:none"></textarea>
+                                                <input type="submit" value="Reply" />
+                                            </form>
+
+                                        </li>
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    <li class="threaded-comments">
+                                        <div class="comments-details">
+                                            <div class="comments-list-img">
+                                                <img src="assets/img/blog/b02.jpg" alt="post-author">
+                                            </div>
+                                            <div class="comments-content-wrap">
+                                                <span>
+                                                    <b><a href="#">@item.createdby.fullname</a></b>
+                                                    Post author
+                                                    <span class="post-time">
+                                                        @item.createdon
+                                                    </span>
+                                                </span>
+                                                <p>@item.detail </p>
+                                                @foreach (var it in Model.replys)
+                                                {
+                                                    if (it.cmtid == item.id)
+                                                    {
+                                                        <span>
+                                                            <b><a href="#">@it.username</a></b>
+
+                                                            <p>@it.detail</p>
+                                                        </span>
+
+                                                    }
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                }
+                            }
+                           
+
+
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="comment-respond">
+                    <h3 class="comment-reply-title">Leave a Comment </h3>
+                    <form action="../NewComment" method="POST">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 comment-form-comment">
+                                <p>Comment</p>
+                                <input type="hidden" name="bookid" value="@Model.book.id">
+                                <textarea id="message-box" name="comment" cols="30" rows="10"></textarea>
+                                <input type="submit" value="Post Comment" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showReply() {
+        var z = document.getElementById("replybox");
+        if (z.style.display === "none") {
+            z.style.display = "block";
+        } else {
+            z.style.display = "none";
+        }
+    }
+</script>
+
